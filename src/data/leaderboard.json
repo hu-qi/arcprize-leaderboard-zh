@@ -1,0 +1,16 @@
+{
+  "lastUpdated": "2026-06-15",
+  "benchmark": "ARC-AGI-2",
+  "entries": [
+    {"rank": 1, "model": "o3", "provider": "OpenAI", "type": "API", "score": 0.877, "costPerTask": 5.57, "date": "2024-12"},
+    {"rank": 2, "model": "Gemini 2.5 Pro", "provider": "Google", "type": "API", "score": 0.58, "costPerTask": 0.06, "date": "2025-03"},
+    {"rank": 3, "model": "o4-mini", "provider": "OpenAI", "type": "API", "score": 0.55, "costPerTask": 0.35, "date": "2025-04"},
+    {"rank": 4, "model": "Claude 3.7 Sonnet", "provider": "Anthropic", "type": "API", "score": 0.42, "costPerTask": 0.05, "date": "2025-02"},
+    {"rank": 5, "model": "DeepSeek-R1", "provider": "DeepSeek", "type": "Open", "score": 0.35, "costPerTask": 0.02, "date": "2025-01"},
+    {"rank": 6, "model": "QwQ-32B", "provider": "Alibaba", "type": "Open", "score": 0.27, "costPerTask": 0.01, "date": "2025-03"},
+    {"rank": 7, "model": "Llama 3.3 70B", "provider": "Meta", "type": "Open", "score": 0.15, "costPerTask": 0.005, "date": "2024-12"},
+    {"rank": 8, "model": "GPT-4o", "provider": "OpenAI", "type": "API", "score": 0.12, "costPerTask": 0.01, "date": "2024-05"},
+    {"rank": 9, "model": "Gemini 1.5 Pro", "provider": "Google", "type": "API", "score": 0.10, "costPerTask": 0.008, "date": "2024-02"},
+    {"rank": 10, "model": "Claude 3 Opus", "provider": "Anthropic", "type": "API", "score": 0.08, "costPerTask": 0.03, "date": "2024-03"}
+  ]
+}
