@@ -133,6 +133,10 @@ body {
 }
 
 /* ===== Navigation Flyout ===== */
+.nav-flyout-wrapper {
+  position: static;
+}
+
 .nav-flyout-bar {
   display: flex;
   gap: 0;
@@ -160,20 +164,18 @@ body {
 }
 
 .nav-flyout-dropdown {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 3rem; /* below 48px (h-12) sticky header */
   left: 0;
   right: 0;
   background: var(--offblack);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
-  transition: height 0.2s ease;
-  z-index: 50;
+  z-index: 60;
 }
 
 .nav-flyout-track {
   display: flex;
-  transition: transform 0.2s ease;
 }
 
 .nav-flyout-panel {

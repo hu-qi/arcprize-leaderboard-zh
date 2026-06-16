@@ -53,8 +53,8 @@ export default async function ArcAgiVersionPage({params}: Props) {
       </nav>
 
       <div className="narrow my-16">
-        <h1>{data.titleZh}</h1>
-        <p className="text-lg my-4">{data.descZh}</p>
+        <h1>{locale === "zh" ? data.titleZh : data.title}</h1>
+        <p className="text-lg my-4">{locale === "zh" ? data.descZh : data.desc}</p>
         <div className="mt-8">
           <Link href="/leaderboard" className="button">
             {locale === "zh" ? "查看排行榜" : "View Leaderboard"}

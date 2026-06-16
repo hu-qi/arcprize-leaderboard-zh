@@ -10,7 +10,7 @@ export default function LocaleSwitcher() {
   const pathname = usePathname();
 
   function switchLocale(newLocale: string) {
-    router.replace(pathname, {locale: newLocale as "zh" | "en"});
+    router.push(pathname, {locale: newLocale as "zh" | "en"});
   }
 
   return (

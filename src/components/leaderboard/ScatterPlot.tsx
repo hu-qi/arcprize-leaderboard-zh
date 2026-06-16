@@ -194,6 +194,11 @@ export default function ScatterPlot({data, labels}: Props) {
       .style("font-family", "Space Mono, monospace")
       .style("pointer-events", "none")
       .text((d) => d.model);
+
+    // Cleanup on unmount: remove all D3 event listeners and DOM
+    return () => {
+      d3.select(svgRef.current).selectAll("*").remove();
+    };
   }, [data, labels]);
 
   return (

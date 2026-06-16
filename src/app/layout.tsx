@@ -12,7 +12,7 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "ARC Prize",
   description:
-    "ARC Prize 基金会是一家非营利组织，致力于通过基准测试和奖项推进开源通用人工智能研究。",
+    "ARC Prize Foundation is a nonprofit organization advancing open-source artificial general intelligence research through benchmarks and prizes.",
 };
 
 export default function RootLayout({

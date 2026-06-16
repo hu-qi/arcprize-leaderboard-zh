@@ -1,5 +1,5 @@
 import {setRequestLocale} from "next-intl/server";
-import {useTranslations} from "next-intl";
+import {useTranslations, useLocale} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import PixelTag from "@/components/ui/PixelTag";
 import Button from "@/components/ui/Button";
@@ -26,7 +26,7 @@ const teamMembers = [
 
 function AboutContent() {
   const t = useTranslations("about");
-  const locale = typeof window !== "undefined" ? "zh" : "zh";
+  const locale = useLocale();
 
   return (
     <div>
@@ -62,7 +62,7 @@ function AboutContent() {
                 className="w-full aspect-square object-cover rounded-sm mb-2"
               />
               <p className="text-sm font-bold">{member.name}</p>
-              <p className="text-xs opacity-70">{member.roleZh}</p>
+              <p className="text-xs opacity-70">{locale === "zh" ? member.roleZh : member.role}</p>
             </div>
           ))}
         </div>

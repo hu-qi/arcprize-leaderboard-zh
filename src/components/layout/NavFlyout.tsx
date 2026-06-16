@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef, useCallback} from "react";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 
@@ -78,61 +78,98 @@ export default function NavFlyout() {
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const close = useCallback(() => setActiveIndex(null), []);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (activeIndex === null) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [activeIndex, close]);
+
+  // Close on click outside
+  useEffect(() => {
+    if (activeIndex === null) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        close();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeIndex, close]);
 
   return (
-    <nav className="hidden md:block relative">
-      <div className="nav-flyout-bar">
-        {columns.map((col, i) => (
-          <button
-            key={col.title}
-            className="nav-flyout-trigger"
-            aria-expanded={activeIndex === i}
-            onMouseEnter={() => setActiveIndex(i)}
-            onMouseLeave={() => setActiveIndex(null)}
-            onClick={() =>
-              setActiveIndex(activeIndex === i ? null : i)
-            }
-          >
-            {col.title}
-          </button>
-        ))}
-      </div>
-      {activeIndex !== null && (
-        <div
-          className="nav-flyout-dropdown"
-          onMouseLeave={() => setActiveIndex(null)}
-        >
-          <div className="nav-flyout-track max-w-[1200px] mx-auto px-6">
-            {columns.map((col, i) => (
-              <div
-                key={col.title}
-                className={`nav-flyout-panel ${
-                  i === activeIndex ? "block" : "hidden"
-                }`}
-              >
-                <h4>{col.title}</h4>
-                <ul>
-                  {col.items.map((item) => (
-                    <li key={item.href}>
-                      {item.external ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link href={item.href}>{item.label}</Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+    <nav className="hidden md:block" aria-label="Main navigation">
+      <div
+        ref={wrapperRef}
+        className="nav-flyout-wrapper"
+        onMouseLeave={close}
+      >
+        <div className="nav-flyout-bar" role="menubar">
+          {columns.map((col, i) => (
+            <button
+              key={col.title}
+              className="nav-flyout-trigger"
+              role="menuitem"
+              aria-expanded={activeIndex === i}
+              aria-haspopup="true"
+              aria-controls={activeIndex === i ? `nav-panel-${i}` : undefined}
+              onMouseEnter={() => setActiveIndex(i)}
+              onClick={() =>
+                setActiveIndex(activeIndex === i ? null : i)
+              }
+            >
+              {col.title}
+            </button>
+          ))}
         </div>
-      )}
+        {activeIndex !== null && (
+          <div
+            id={`nav-panel-${activeIndex}`}
+            className="nav-flyout-dropdown"
+            role="menu"
+          >
+            <div className="nav-flyout-track max-w-[1200px] mx-auto px-6">
+              {columns.map((col, i) => (
+                <div
+                  key={col.title}
+                  className={`nav-flyout-panel ${
+                    i === activeIndex ? "block" : "hidden"
+                  }`}
+                >
+                  <h4>{col.title}</h4>
+                  <ul>
+                    {col.items.map((item) => (
+                      <li key={item.href} role="none">
+                        {item.external ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            role="menuitem"
+                          >
+                            {item.label}
+                          </a>
+                        ) : (
+                          <Link href={item.href} role="menuitem">
+                            {item.label}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

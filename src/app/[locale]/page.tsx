@@ -167,7 +167,7 @@ function HomeContent() {
 
       {/* ===== Prize Preview ===== */}
       <div className="mx-auto grid max-w-[1200px] items-start gap-6 my-8 px-6 md:grid-cols-2">
-        <div className="bg-black width-full">
+        <div className="bg-black w-full">
           <img
             src="/media/images/home-arc-prize-2026.jpg"
             alt="Over $2M in prize. 3 tracks. Get started."
@@ -185,7 +185,7 @@ function HomeContent() {
 
       {/* ===== Founder Message ===== */}
       <div className="mx-auto grid max-w-[1200px] items-start gap-6 my-8 mb-0 px-6 md:grid-cols-2">
-        <div className="bg-black width-full">
+        <div className="bg-black w-full">
           <img
             src="/media/images/nyt-mk-fc-2.jpg"
             alt="ARC Prize Co-Founders Mike Knoop and François Chollet"

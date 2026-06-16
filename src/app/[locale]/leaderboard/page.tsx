@@ -1,6 +1,6 @@
 import {setRequestLocale, getTranslations} from "next-intl/server";
 import ScatterPlotWrapper from "@/components/leaderboard/ScatterPlotWrapper";
-import leaderboardData from "@/data/leaderboard.json";;
+import leaderboardData from "@/data/leaderboard.json";
 
 type Props = {
   params: Promise<{locale: string}>;
